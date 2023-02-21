@@ -1,0 +1,41 @@
+﻿@using MvcFilmDunyasi.Data
+@model List<Film>
+
+@{
+    ViewBag.Title = "Filmler";
+}
+
+<h1>Filmler</h1>
+
+<a asp-action="Yeni" class="btn btn-primary">Film Ekle</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Film Adı</th>
+            <th>Yıl</th>
+            <th>Puan</th>
+            <th>Türler</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Film film in Model)
+        {
+            <tr>
+                <td>@film.Id</td>
+                <td>@film.Ad</td>
+                <td>@film.Yil</td>
+                <td>@film.Puan</td>
+                <td>
+                    @string.Join(", ", film.Turler.Select(x => x.Ad))
+                </td>
+                <td>
+                    <a asp-action="Duzenle" asp-route-id="@film.Id">Düzenle</a>
+                    <a asp-action="Sil" asp-route-id="@film.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

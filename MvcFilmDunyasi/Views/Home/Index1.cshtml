@@ -1,0 +1,36 @@
+﻿@using MvcFilmDunyasi.Data
+@model List<Film>;
+
+@{
+    ViewData["Title"] = "Home Page";
+};
+
+<select asp-items="ViewBag.Turler">
+    <option>Tümü</option>
+</select>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Film Adı</th>
+            <th>Yıl</th>
+            <th>Puan</th>
+            <th>Türler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Film film in Model)
+        {
+            <tr>
+                <td>@film.Id</td>
+                <td>@film.Ad</td>
+                <td>@film.Yil</td>
+                <td>@film.Puan</td>
+                <td>
+                    @string.Join(", ", film.Turler.Select(x => x.Ad))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
